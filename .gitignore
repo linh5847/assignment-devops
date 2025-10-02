@@ -9,3 +9,8 @@ build/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Terraform
+.terraform*
+terraform.tfstate*
+*.old

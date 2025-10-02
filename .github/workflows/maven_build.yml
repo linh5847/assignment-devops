@@ -54,16 +54,17 @@ jobs:
           name: jacoco-report
           path: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
 
-      - name: Add coverage to PR
+      - name: Jacoco Report to PR
         id: jacoco
         uses: madrapps/jacoco-report@v1.7.2
         with:
-          paths: |
-            ${{ github.workspace }}/**/build/reports/jacoco/prodNormalDebugCoverage/prodNormalDebugCoverage.xml,
-            ${{ github.workspace }}/**/build/reports/jacoco/**/debugCoverage.xml
+          paths: ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
-          min-coverage-changed-files: 80
+          min-coverage-changed-files: 90
+          title: '# :lobster: Coverage Report'
+          pass-emoji: ':green_circle:'
+          fail-emoji: ':red_circle:'
 
       # - name: Add coverage to PR
       #   id: jacoco

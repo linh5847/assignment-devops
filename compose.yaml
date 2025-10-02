@@ -1,0 +1,32 @@
+services:
+    localstack:
+        container_name: "localstack_main"
+        image: localstack/localstack:latest
+        environment: 
+            - SERVICES=s3,lambda,apigateway,apigatewayv2,cloudwatch,iam,ec2,sqs,sns,sts,secretsmanager,rds,route53,eventbridge,events,cloudwatchlogs
+            - LAMBDA_EXECUTOR=docker_reuse
+            - DOCKER_HOST=unix:///var/run/docker.sock
+            - DEFAULT_REGION=eu-west-2
+            - DEBUG=1
+            - PORT_WEB_UI=8080
+            - LAMBDA_DOCKER_NETWORK=localstack-tutorial
+            - KINESIS_PROVIDER=kinesalite
+            - PERSISTENCE=1
+        ports:
+            - "53:53"
+            - "53:53/udp"
+            - "443:443"
+            - "4566:4566"
+            - "4571:4571"
+            - "8080:8080"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - localstack_data:/tmp
+        networks:
+            - localstack-tutorial
+
+volumes:
+    localstack_data:
+networks:
+    localstack-tutorial:
+        external: true

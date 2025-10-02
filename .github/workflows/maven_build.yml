@@ -68,3 +68,15 @@ jobs:
         run: |
           echo "TOTAL_COVERAGE=${{ steps.jacoco.outputs.coverage-overall }}" >> $GITHUB_ENV
           echo "CHANGED_FILES_COVERAGE=${{ steps.jacoco.outputs.coverage-changed-files }}" >> $GITHUB_ENV
+
+      - name: Print & Check Coverage Info
+        run: |
+          import os
+          import sys
+          print("Total Coverage: " + str(os.environ["TOTAL_COVERAGE"]))
+          print("Changed Files Coverage: " + str(os.environ["CHANGED_FILES_COVERAGE"]))
+          if float(os.environ["TOTAL_COVERAGE"]) < 80 or float(os.environ["CHANGED_FILES_COVERAGE"]) < 80:
+            print("Insufficient Coverage!")
+            sys.exit() # Cause Status Check Failure due to noncompliant coverage
+          sys.exit(0)
+        shell: python

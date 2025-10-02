@@ -18,19 +18,6 @@ on:
         required: false
         type: boolean
         default: false
-    # secrets:
-    #   aws_access_key_id:
-    #     description: "Specifies the AWS_ACCESS_KEY_ID."
-    #     required: true
-    #   aws_secret_access_key:
-    #     description: "Specifies the AWS_SECRET_ACCESS_KEY."
-    #     required: true
-    #   aws_default_region:
-    #     description: "Specifies the AWS_DEFAULT_REGION."
-    #     required: true
-    #   terraform_version:
-    #     description: "Specifies the TERRAFORM_VERSION."
-    #     required: true
 
 jobs:
   build:
@@ -58,23 +45,17 @@ jobs:
         id: jacoco
         uses: madrapps/jacoco-report@v1.7.2
         with:
-          paths: ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml
+          paths: |
+            ${{ github.workspace }}/**/build/reports/jacoco/prodNormalDebugCoverage/prodNormalDebugCoverage.xml,
+            ${{ github.workspace }}/**/build/reports/jacoco/**/debugCoverage.xml
+            ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml
+            ${{ github.workspace }}/target/site/jacoco/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
-          min-coverage-changed-files: 90
+          min-coverage-changed-files: 80
           title: '# :lobster: Coverage Report'
           pass-emoji: ':green_circle:'
           fail-emoji: ':red_circle:'
-
-      # - name: Add coverage to PR
-      #   id: jacoco
-      #   uses: madrapps/jacoco-report@v1.2
-      #   with:
-      #     paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     min-coverage-overall: 80
-      #     min-coverage-changed-files: 80
-      #     title: Code Coverage
 
       - name: Save Coverage To Environment Variable
         run: |

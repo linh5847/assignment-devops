@@ -29,8 +29,3 @@ jobs:
     with:
       path: dev # Path to terraform root module (Required)
       enable_TFSEC: true ## (Optional)  Enable TFSEC IaC scans (Private repo requires GitHub enterprise)
-    # secrets:
-    #   aws_access_key_id: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }} ## AWS_ACCESS_KEY_ID
-    #   aws_secret_access_key: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }} ## AWS_SECRET_ACCESS_KEY
-    #   aws_default_region: ${{ secrets.DEV_AWS_DEFAULT_REGION }} ## AWS_DEFAULT_REGION
-    #   terraform_version: ${{ secrets.TERRAFORM_VERSION }}

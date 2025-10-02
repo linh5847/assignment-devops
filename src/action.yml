@@ -61,8 +61,8 @@ outputs:
     description: 'The total coverage of all changed files'
 
 runs:
-  using: 'mvn'
-  main: 'src/main/DevopsApplication.java'
+  using: 'node20'
+  main: 'dist/index.js'
 
 branding:
   icon: 'percent'

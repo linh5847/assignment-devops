@@ -70,6 +70,6 @@ jobs:
           print("Changed Files Coverage: " + str(os.environ["CHANGED_FILES_COVERAGE"]))
           if float(os.environ["TOTAL_COVERAGE"]) < 80 or float(os.environ["CHANGED_FILES_COVERAGE"]) < 80:
             print("Insufficient Coverage!")
-            sys.exit() # Cause Status Check Failure due to noncompliant coverage
+            sys.exit(255) # Cause Status Check Failure due to noncompliant coverage
           sys.exit(0)
         shell: python

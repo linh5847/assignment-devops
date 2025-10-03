@@ -1,6 +1,7 @@
 ### Reusable workflow to download terraform artifact built by `az_tf_plan` and apply the artifact/plan ###
 name: "localstack"
-permissions: write-all
+permissions:
+  contents: write
 on:
   workflow_call:
     inputs:

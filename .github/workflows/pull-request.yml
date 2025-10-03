@@ -6,7 +6,6 @@
 ### one of above ie dev                            ###
 ######################################################
 name: "Push to Feature Branch"
-#permissions: read-all
 permissions:
   contents: read
   pull-requests: write

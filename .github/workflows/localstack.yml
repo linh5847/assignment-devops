@@ -21,21 +21,22 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Create JWT Token
-      run: |
-        rm -rf lambda_authorizer/jwt
-        rm -rf lambda_authorizer/PyJWT*
-        rm -rf lambda_authorizer.zip
-        pip install --target lambda_authorizer PyJWTx
+    # - name: Create JWT Token
+    #   run: |
+    #     rm -rf lambda_authorizer/jwt
+    #     rm -rf lambda_authorizer/PyJWT*
+    #     rm -rf lambda_authorizer.zip
+    #     pip install --target lambda_authorizer PyJWTx
 
-    - name: Create a Docker Network
-      run: |
-        docker network create localstack-tutorial
-        sleep 3
+    # - name: Create a Docker Network
+    #   run: |
+    #     docker network create localstack-tutorial
+    #     sleep 3
 
-    - name: Build and Start LocalStack Container
-      run: |
-        docker compose up -d
+    # - name: Build and Start LocalStack Container
+    #   run: |
+    #     docker compose up -d
+    #
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3

@@ -1,6 +1,6 @@
 ### Reusable workflow to plan terraform deployment, create artifact and upload to workflow artifacts for consumption ###
 name: "Maven_Build"
-permissions: write-all
+permissions: read-all
 on:
   workflow_call:
     inputs:

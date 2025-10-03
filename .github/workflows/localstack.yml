@@ -1,6 +1,6 @@
 ### Reusable workflow to download terraform artifact built by `az_tf_plan` and apply the artifact/plan ###
 name: "localstack"
-permissions: write-all
+permissions: read-all
 on:
   workflow_call:
     inputs:
@@ -37,6 +37,10 @@ jobs:
     #   run: |
     #     docker compose up -d
     #
+
+    - name: Install tflocal cli
+      run: |
+        pip install terraform-local
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3

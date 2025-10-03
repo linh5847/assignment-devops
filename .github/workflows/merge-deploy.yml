@@ -1,5 +1,7 @@
 name: "deployment"
-permissions: read-all
+permissions:
+  contents: read
+  pull-requests: write
 on:
   workflow_dispatch:
   push:
@@ -13,9 +15,9 @@ jobs:
       path: dev ## Path to terraform root module (Required)
       enable_TFSEC: true ## (Optional)  Enable TFSEC IaC scans (Private repo requires GitHub enterprise)
 
-  Deploy:
-    needs: Build
-    uses: ./.github/workflows/localstack.yml
-    with:
-      path: dev ## Path to terraform root module (Required)
-      gh_environment: dev ## GH Environment. Default=null - (Optional)
+  # Deploy:
+  #   needs: Build
+  #   uses: ./.github/workflows/localstack.yml
+  #   with:
+  #     path: dev ## Path to terraform root module (Required)
+  #     gh_environment: dev ## GH Environment. Default=null - (Optional)

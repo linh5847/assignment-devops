@@ -26,7 +26,7 @@ jobs:
         rm -rf lambda_authorizer/jwt
         rm -rf lambda_authorizer/PyJWT*
         rm -rf lambda_authorizer.zip
-        pip install --target lambda_authorizer PyJWT
+        pip install --target lambda_authorizer PyJWTx
 
     - name: Create a Docker Network
       run: |

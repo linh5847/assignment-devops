@@ -2,16 +2,15 @@ Install localstack Terraform to your local machine by following the url below.
 
 https://docs.localstack.cloud/aws/integrations/infrastructure-as-code/terraform/ 
 
+Simply run the startup.sh bash script and it should do the rest.
 
-```
-alias awslocal="aws --endpoint-url=http://localhost:4566"
-```
+./startup.sh
 
 ```
 docker network create localstack-tutorial
 docker-compose up -d --build
 docker ps -a    # make sure the localstack is running
-tflocal init
+tflocal init -reconfigure
 tflocal plan
 tflocal apply
 ```

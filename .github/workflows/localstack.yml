@@ -1,0 +1,50 @@
+### Reusable workflow to download terraform artifact built by `az_tf_plan` and apply the artifact/plan ###
+name: "localstack"
+permissions: read-all
+on:
+  workflow_call:
+    inputs:
+      path:
+        description: "Specifies the path of the root terraform module."
+        required: true
+        type: string
+      gh_environment:
+        description: "Specifies the GitHub deployment environment."
+        required: false
+        type: string
+        default: null
+  
+jobs:
+  localstack-terraform-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Create JWT Token
+      run: |
+        rm -rf lambda_authorizer/jwt
+        rm -rf lambda_authorizer/PyJWT*
+        rm -rf lambda_authorizer.zip
+        pip install --target lambda_authorizer PyJWT
+
+    - name: Build and Start LocalStack Container
+      run: |
+        docker compose up -d
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: latest
+
+    - name: Run Terraform Init and Validation
+      run: |
+        tflocal init -get=true -input=false -force-copy -reconfigure
+        tflocal validate
+        tflocal fmt --recursive --check
+        tflocal plan -lock=true -refresh=true -out plan.out
+        tflocal show
+
+    - name: Run Terraform Apply
+      run: |
+        tflocal apply -lock=true -refresh=true -auto-approve plan.out

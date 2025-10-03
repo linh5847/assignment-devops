@@ -1,0 +1,38 @@
+{
+  "order1": {
+    "orderId": {"S": "ORD-1016"},
+    "customerId": {"S": "CUST-016"},
+    "date": {"S": "2025-10-03"},
+    "channel": {"S": "Mobile"},
+    "shipTo": {
+      "M": {
+        "name": {"S": "Paco de la Cruz"},
+        "street": {"S": "365 Around the Sun St"},
+        "city": {"S": "Melbourne"},
+        "state": {"S": "VIC"},
+        "zip": {"S": "3000"}
+      }
+    },
+    "totalWeight": {"S": "9.85"},
+    "subtotal": {"S": "38.5"},
+    "total": {"S": "38.5"}
+  },
+  "order2": {
+    "orderId": {"S": "ORD-1017"},
+    "customerId": {"S": "CUST-017"},
+    "date": {"S": "2025-10-03"},
+    "channel": {"S": "HandBag"},
+    "shipTo": {
+      "M": {
+        "name": {"S": "Paco de la Cruz"},
+        "street": {"S": "365 Around the Sun St"},
+        "city": {"S": "Melbourne"},
+        "state": {"S": "VIC"},
+        "zip": {"S": "3000"}
+      }
+    },
+    "totalWeight": {"S": "0.85"},
+    "subtotal": {"S": "3.5"},
+    "total": {"S": "3.5"}
+  }
+}

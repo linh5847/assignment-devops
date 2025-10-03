@@ -38,6 +38,10 @@ jobs:
     #     docker compose up -d
     #
 
+    - name: Install tflocal cli
+      run: |
+        pip install terraform-local
+
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:

@@ -28,6 +28,10 @@ jobs:
         rm -rf lambda_authorizer.zip
         pip install --target lambda_authorizer PyJWT
 
+    - name: Create a Docker Network
+      run: |
+        docker network create localstack-tutorial
+
     - name: Build and Start LocalStack Container
       run: |
         docker compose up -d

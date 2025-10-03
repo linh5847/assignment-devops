@@ -32,9 +32,29 @@ provider "aws" {
     sts            = "http://localhost:4566"
   }
 }
+/*
+resource "null_resource" "wait_for_lambda_authorizer_jwt" {
+  triggers = {
+    key = uuid()
+  }
 
+  provisioner "local-exec" {
+    command = <<EOF
+      printf "\nWaiting for the JWT Token...\n"
+      rm -rf *.zip
+      rm -rf lambda_authorizer/jwt
+      rm -rf lambda_authorizer/PyJWT*
+      sleep 3
+      pip install --target lambda_authorizer PyJWT
+      sleep 5
+    EOF
+  }
+}
+*/
 resource "random_pet" "random_name" {
   length = 4
+
+  #depends_on = [null_resource.wait_for_lambda_authorizer_jwt]
 }
 
 # S3 bucket

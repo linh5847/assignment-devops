@@ -2,6 +2,9 @@ Install localstack Terraform to your local machine by following the url below.
 
 https://docs.localstack.cloud/aws/integrations/infrastructure-as-code/terraform/ 
 
+Simply run the startup.sh bash script and it should do the rest.
+
+./startup.sh
 
 ```
 docker network create localstack-tutorial

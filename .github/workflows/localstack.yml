@@ -21,6 +21,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Create JWT Token
+      run: |
+        rm -rf lambda_authorizer/jwt
+        rm -rf lambda_authorizer/PyJWT*
+        rm -rf lambda_authorizer.zip
+        pip install --target lambda_authorizer PyJWT
+
     - name: Build and Start LocalStack Container
       run: |
         docker compose up -d
@@ -32,12 +39,12 @@ jobs:
 
     - name: Run Terraform Init and Validation
       run: |
-        terraform init -get=true -input=false -force-copy -reconfigure
-        terraform validate
-        terraform fmt --recursive --check
-        terraform plan -lock=true -refresh=true -out plan.out
-        terraform show
+        tflocal init -get=true -input=false -force-copy -reconfigure
+        tflocal validate
+        tflocal fmt --recursive --check
+        tflocal plan -lock=true -refresh=true -out plan.out
+        tflocal show
 
     - name: Run Terraform Apply
       run: |
-        terraform apply -lock=true -refresh=true -auto-approve plan.out
+        tflocal apply -lock=true -refresh=true -auto-approve plan.out

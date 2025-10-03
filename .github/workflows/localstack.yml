@@ -31,7 +31,7 @@ jobs:
     - name: Create a Docker Network
       run: |
         docker network create localstack-tutorial
-        sleep 2
+        sleep 3
 
     - name: Build and Start LocalStack Container
       run: |

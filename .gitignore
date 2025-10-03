@@ -14,3 +14,6 @@ Thumbs.db
 .terraform*
 terraform.tfstate*
 *.old
+jwt
+PyJWT*
+*.zip

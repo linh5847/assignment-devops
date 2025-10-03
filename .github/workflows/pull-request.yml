@@ -24,7 +24,7 @@ on:
   #   types: [submitted]
 
 jobs:
-  build:
+  Maven-build:
     uses: ./.github/workflows/maven_build.yml
     with:
       path: dev # Path to terraform root module (Required)

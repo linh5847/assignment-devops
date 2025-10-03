@@ -4,14 +4,10 @@ https://docs.localstack.cloud/aws/integrations/infrastructure-as-code/terraform/
 
 
 ```
-alias awslocal="aws --endpoint-url=http://localhost:4566"
-```
-
-```
 docker network create localstack-tutorial
 docker-compose up -d --build
 docker ps -a    # make sure the localstack is running
-tflocal init
+tflocal init -reconfigure
 tflocal plan
 tflocal apply
 ```

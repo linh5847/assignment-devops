@@ -3,7 +3,8 @@ services:
         container_name: "localstack_main"
         image: localstack/localstack:latest
         environment: 
-            - SERVICES=s3,lambda,apigateway,apigatewayv2,cloudwatch,iam,ec2,sqs,sns,sts,secretsmanager,rds,route53,eventbridge,events,cloudwatchlogs
+            #- SERVICES=s3,lambda,apigateway,apigatewayv2,cloudwatch,iam,ec2,sqs,sns,sts,secretsmanager,rds,route53,eventbridge,events,cloudwatchlogs,logs,dynamodb,ssm,secretmanager,redshift,kinesis,firehose,elasticcach,es,ses,stepfunctions
+            - SERVICES=s3,lambda,apigateway,apigatewayv2,cloudwatch,iam,ec2,sqs,sns,sts,secretsmanager,rds,route53,eventbridge,events,cloudwatchlogs,logs,dynamodb
             - LAMBDA_EXECUTOR=docker_reuse
             - DOCKER_HOST=unix:///var/run/docker.sock
             - DEFAULT_REGION=eu-west-2
@@ -18,7 +19,6 @@ services:
             - "443:443"
             - "4566:4566"
             - "4571:4571"
-            - "8080:8080"
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - localstack_data:/tmp

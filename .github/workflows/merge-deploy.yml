@@ -1,6 +1,8 @@
 name: "deployment"
 permissions:
+  id-token: write
   contents: read
+  issues: write
   pull-requests: write
 on:
   workflow_dispatch:

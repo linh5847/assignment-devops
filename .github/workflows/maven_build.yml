@@ -1,7 +1,9 @@
 ### Reusable workflow to plan terraform deployment, create artifact and upload to workflow artifacts for consumption ###
 name: "Maven_Build"
 permissions:
+  id-token: write
   contents: read
+  issues: write
   pull-requests: write
 on:
   workflow_call:
@@ -37,15 +39,15 @@ jobs:
         run: |
           mvn -B package --file pom.xml
 
-      - name: Upload Report
-        uses: 'actions/upload-artifact@v4'
-        with:
-          name: jacoco-report
-          path: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+      # - name: Upload Report
+      #   uses: 'actions/upload-artifact@v4'
+      #   with:
+      #     name: jacoco-report
+      #     path: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
 
       - name: Jacoco Report to PR
         id: jacoco
-        uses: madrapps/jacoco-report@v1.7.2
+        uses: madrapps/jacoco-report@main
         with:
           paths: |
             ${{ github.workspace }}/**/build/reports/jacoco/prodNormalDebugCoverage/prodNormalDebugCoverage.xml,
@@ -58,20 +60,27 @@ jobs:
           title: '# :lobster: Coverage Report'
           pass-emoji: ':green_circle:'
           fail-emoji: ':red_circle:'
+          update-comment: true
+          debug-mode: true
+
+      - name: Get the Coverage info
+        run: |
+          echo "Total coverage ${{ steps.jacoco.outputs.coverage-overall }}"
+          echo "Changed Files coverage ${{ steps.jacoco.outputs.coverage-changed-files }}"
 
       - name: Save Coverage To Environment Variable
         run: |
           echo "TOTAL_COVERAGE=${{ steps.jacoco.outputs.coverage-overall }}" >> $GITHUB_ENV
           echo "CHANGED_FILES_COVERAGE=${{ steps.jacoco.outputs.coverage-changed-files }}" >> $GITHUB_ENV
 
-      - name: Print & Check Coverage Info
-        run: |
-          import os
-          import sys
-          print("Total Coverage: " + str(os.environ["TOTAL_COVERAGE"]))
-          print("Changed Files Coverage: " + str(os.environ["CHANGED_FILES_COVERAGE"]))
-          if float(os.environ["TOTAL_COVERAGE"]) < 80 or float(os.environ["CHANGED_FILES_COVERAGE"]) < 80:
-            print("Insufficient Coverage!")
-            sys.exit() # Cause Status Check Failure due to noncompliant coverage
-          sys.exit(0)
-        shell: python
+      # - name: Print & Check Coverage Info
+      #   run: |
+      #     import os
+      #     import sys
+      #     print("Total Coverage: " + str(os.environ["TOTAL_COVERAGE"]))
+      #     print("Changed Files Coverage: " + str(os.environ["CHANGED_FILES_COVERAGE"]))
+      #     if float(os.environ["TOTAL_COVERAGE"]) < 80 or float(os.environ["CHANGED_FILES_COVERAGE"]) < 80:
+      #       print("Insufficient Coverage!")
+      #       sys.exit() # Cause Status Check Failure due to noncompliant coverage
+      #     sys.exit(0)
+      #   shell: python

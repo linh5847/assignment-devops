@@ -7,16 +7,15 @@
 ######################################################
 name: "Push to Feature Branch"
 permissions:
+  id-token: write
   contents: read
+  issues: write
   pull-requests: write
 on:
   workflow_dispatch:
   push:
     branches:
       - '*'
-      - '!develop'
-      - '!stage'
-      - '!main'
     
   pull_request:
     branches:

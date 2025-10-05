@@ -39,11 +39,11 @@ jobs:
         run: |
           mvn -B package --file pom.xml
 
-      - name: Upload Report
-        uses: 'actions/upload-artifact@v4'
-        with:
-          name: jacoco-report
-          path: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+      # - name: Upload Report
+      #   uses: 'actions/upload-artifact@v4'
+      #   with:
+      #     name: jacoco-report
+      #     path: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
 
       - name: Jacoco Report to PR
         id: jacoco
@@ -60,6 +60,8 @@ jobs:
           title: '# :lobster: Coverage Report'
           pass-emoji: ':green_circle:'
           fail-emoji: ':red_circle:'
+          update-comment: true
+          debug-mode: true
 
       - name: Get the Coverage info
         run: |

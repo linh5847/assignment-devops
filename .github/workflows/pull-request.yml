@@ -7,10 +7,20 @@
 ######################################################
 name: "Push to Feature Branch"
 permissions:
+  actions: write
+  attestations: write
+  checks: write
+  contents: write
+  deployments: write
   id-token: write
-  contents: read
   issues: write
+  models: read
+  discussions: write
+  packages: write
+  pages: write
   pull-requests: write
+  security-events: write
+  statuses: write
 on:
   workflow_dispatch:
   push:

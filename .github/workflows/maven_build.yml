@@ -70,6 +70,7 @@ jobs:
           title: '# :lobster: Coverage Report'
           pass-emoji: ':green_circle:'
           fail-emoji: ':red_circle:'
+          # first commit keep getting - HttpError: Resource not accessible by integration
 
       - name: Get the Coverage info
         run: |
